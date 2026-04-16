@@ -1,7 +1,7 @@
 # Jamf Pro Instance Report Generator
 
 Generates a comprehensive, self-contained HTML report for a Jamf Pro instance
-using [jamf-cli]((https://github.com/Jamf-Concepts/jamf-cli)). All data is
+using [jamf-cli](https://github.com/Jamf-Concepts/jamf-cli). All data is
 collected via the Jamf Pro API through `jamf-cli`; no credentials are stored by
 this script.
 
