@@ -1,0 +1,9 @@
+[
+  {"id": "1", "name": "Deployment Tools"},
+  {"id": "2", "name": "Identity & Access"},
+  {"id": "3", "name": "Maintenance"},
+  {"id": "4", "name": "No Category"},
+  {"id": "5", "name": "Security"},
+  {"id": "6", "name": "Software"},
+  {"id": "9", "name": "Enrollment"}
+]

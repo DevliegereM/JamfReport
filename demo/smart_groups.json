@@ -1,0 +1,15 @@
+[
+  {"id": "1",  "name": "All Managed Computers"},
+  {"id": "2",  "name": "macOS 15 and Above"},
+  {"id": "3",  "name": "macOS 14 and Below"},
+  {"id": "4",  "name": "FileVault Not Encrypted"},
+  {"id": "5",  "name": "Firewall Disabled"},
+  {"id": "6",  "name": "Gatekeeper Disabled"},
+  {"id": "7",  "name": "SIP Disabled"},
+  {"id": "8",  "name": "CrowdStrike Not Installed"},
+  {"id": "9",  "name": "Last Check-In Over 30 Days"},
+  {"id": "10", "name": "MDM Profile Pending Renewal"},
+  {"id": "11", "name": "macOS Upgrade Eligible"},
+  {"id": "12", "name": "Apple Silicon"},
+  {"id": "13", "name": "Intel Mac"}
+]

@@ -1,0 +1,28 @@
+# Jamf Pro Instance Report Generator — Requirements
+#
+# Install all Homebrew dependencies with:
+#   brew install Jamf-Concepts/tap/jamf-cli jq
+#
+# macOS ships with bash 3.2. The script uses only POSIX-compatible bash
+# features and is compatible with bash 3.2+, so no upgrade is required.
+
+# ── Required ──────────────────────────────────────────────────────────────────
+
+# Jamf CLI — communicates with Jamf Pro API
+# Tap  : Jamf-Concepts/tap
+# Brew : brew install Jamf-Concepts/tap/jamf-cli
+jamf-cli>=1.5.0
+
+# jq — JSON processing (used throughout the report builder)
+# Brew : brew install jq
+jq>=1.6
+
+# ── Optional (demo mode only) ─────────────────────────────────────────────────
+
+# bash — the demo runner (demo/run-demo.sh) uses process substitution and
+# export; bash 3.2 (macOS built-in) is sufficient.
+bash>=3.2
+
+# base64 — used by demo/run-demo.sh to encode icon.png
+# Ships with macOS (part of GNU coreutils / BSD base)
+base64

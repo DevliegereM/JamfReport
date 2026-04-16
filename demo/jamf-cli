@@ -1,0 +1,67 @@
+#!/bin/bash
+# Demo stub for jamf-cli — serves static fixture data from ./demo/
+# Usage: PATH="$(dirname "$0"):$PATH" bash report.sh --no-open -o demo-report.html
+DEMO="$(cd "$(dirname "$0")" 2>/dev/null && pwd)"
+
+case "$*" in
+  *overview*)                           cat "$DEMO/overview.json"     ;;
+  *"report security"*)                  cat "$DEMO/security.json"     ;;
+  *"classic-policies list"*)            cat "$DEMO/policies.json"     ;;
+
+  # Individual policy detail — returns enabled+scope+packages+scripts fields.
+  # Demo scenario:
+  #   IDs 12-13  → disabled (still scoped and have package/script refs)
+  #   IDs 18-19  → enabled but no scope, no refs (orphaned)
+  #   IDs 7,8,9  → reference packages 1-5, scripts 1-7 (covering most assets)
+  #   All others → normal (all_computers, no extra refs)
+  # Packages 6-8 and scripts 8-10 are NOT referenced → show as unused.
+  *"classic-policies get"*)
+    _pid="$(echo " $* " | grep -oE ' [0-9]+ ' | head -1 | tr -d ' ')"
+    _pname="$(jq -r --arg i "$_pid" '.[] | select(.id==$i) | .name' \
+        "$DEMO/policies.json" 2>/dev/null || echo "Demo Policy")"
+    case "$_pid" in
+      12|13)  # Disabled — still scoped
+        printf '{"general":{"id":%s,"name":"%s","enabled":false},"scope":{"all_computers":false,"all_jss_users":false,"computers":[{"id":1}],"computer_groups":[],"buildings":[],"departments":[]},"package_configuration":{"packages":[]},"scripts":[]}\n' \
+          "$_pid" "$_pname" ;;
+      18|19)  # Enabled but no scope, no refs
+        printf '{"general":{"id":%s,"name":"%s","enabled":true},"scope":{"all_computers":false,"all_jss_users":false,"computers":[],"computer_groups":[],"buildings":[],"departments":[]},"package_configuration":{"packages":[]},"scripts":[]}\n' \
+          "$_pid" "$_pname" ;;
+      7)  # References packages 1-3 and scripts 1-3
+        printf '{"general":{"id":7,"name":"%s","enabled":true},"scope":{"all_computers":true,"all_jss_users":false,"computers":[],"computer_groups":[],"buildings":[],"departments":[]},"package_configuration":{"packages":[{"id":1,"name":"GoogleChrome"},{"id":2,"name":"MicrosoftEdge"},{"id":3,"name":"Zoom"}]},"scripts":[{"id":1,"name":"filevault-enable.sh"},{"id":2,"name":"firewall-enable.sh"},{"id":3,"name":"crowdstrike-check.sh"}]}\n' \
+          "$_pname" ;;
+      8)  # References packages 4-5 and scripts 4-5
+        printf '{"general":{"id":8,"name":"%s","enabled":true},"scope":{"all_computers":true,"all_jss_users":false,"computers":[],"computer_groups":[],"buildings":[],"departments":[]},"package_configuration":{"packages":[{"id":4,"name":"Slack"},{"id":5,"name":"CrowdStrikeFalcon"}]},"scripts":[{"id":4,"name":"jamf-connect-remediate.sh"},{"id":5,"name":"macos-upgrade-notify.sh"}]}\n' \
+          "$_pname" ;;
+      9)  # References scripts 6-7
+        printf '{"general":{"id":9,"name":"%s","enabled":true},"scope":{"all_computers":true,"all_jss_users":false,"computers":[],"computer_groups":[],"buildings":[],"departments":[]},"package_configuration":{"packages":[]},"scripts":[{"id":6,"name":"policy-logs-flush.sh"},{"id":7,"name":"health-check.sh"}]}\n' \
+          "$_pname" ;;
+      *)  # Normal — all_computers, no package/script refs
+        printf '{"general":{"id":%s,"name":"%s","enabled":true},"scope":{"all_computers":true,"all_jss_users":false,"computers":[],"computer_groups":[],"buildings":[],"departments":[]},"package_configuration":{"packages":[]},"scripts":[]}\n' \
+          "$_pid" "$_pname" ;;
+    esac ;;
+
+  *"classic-macos-config-profiles list"*)  cat "$DEMO/macos_prof.json" ;;
+
+  # Individual macOS profile detail — returns scope fields used by cleanup analysis.
+  # Demo scenario: IDs 13-14 have no scope.
+  *"classic-macos-config-profiles get"*)
+    _prid="$(echo " $* " | grep -oE ' [0-9]+ ' | head -1 | tr -d ' ')"
+    _prname="$(jq -r --arg i "$_prid" '.[] | select(.id==$i) | .name' \
+        "$DEMO/macos_prof.json" 2>/dev/null || echo "Demo Profile")"
+    case "$_prid" in
+      13|14)  # No scope — orphaned profile
+        printf '{"general":{"id":%s,"name":"%s"},"scope":{"all_computers":false,"all_jss_users":false,"computers":[],"computer_groups":[],"buildings":[],"departments":[]}}\n' \
+          "$_prid" "$_prname" ;;
+      *)      # Normal — scoped to all computers
+        printf '{"general":{"id":%s,"name":"%s"},"scope":{"all_computers":true,"all_jss_users":false,"computers":[],"computer_groups":[],"buildings":[],"departments":[]}}\n' \
+          "$_prid" "$_prname" ;;
+    esac ;;
+
+  *"classic-mobile-config-profiles"*)   cat "$DEMO/ios_prof.json"     ;;
+  *"smart-computer-groups"*)            cat "$DEMO/smart_groups.json" ;;
+  *"categories list"*)                  cat "$DEMO/categories.json"   ;;
+  *"scripts list"*)                     cat "$DEMO/scripts.json"      ;;
+  *"packages list"*)                    cat "$DEMO/packages.json"     ;;
+  *version*)                            echo "jamf-cli 1.5.0"         ;;
+  *)                                    echo "[]"                      ;;
+esac

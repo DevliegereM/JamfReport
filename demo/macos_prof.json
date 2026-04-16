@@ -1,0 +1,17 @@
+[
+  {"id": "1",  "name": "CORP - FileVault - Enable"},
+  {"id": "2",  "name": "CORP - Firewall - Enable"},
+  {"id": "3",  "name": "CORP - CrowdStrike - Sensor Config"},
+  {"id": "4",  "name": "CORP - Jamf Connect - Login Window"},
+  {"id": "5",  "name": "CORP - WiFi - Corporate"},
+  {"id": "6",  "name": "CORP - VPN - Configuration"},
+  {"id": "7",  "name": "CORP - Certificates - Root CA"},
+  {"id": "8",  "name": "CORP - Certificates - Intermediate CA"},
+  {"id": "9",  "name": "CORP - Privacy Preferences - CrowdStrike"},
+  {"id": "10", "name": "CORP - Privacy Preferences - Jamf"},
+  {"id": "11", "name": "CORP - System Extensions - CrowdStrike"},
+  {"id": "12", "name": "CORP - Notifications - Allow CrowdStrike"},
+  {"id": "13", "name": "CORP - Accessibility - Approved Apps"},
+  {"id": "14", "name": "CORP - Software Updates - Defer Minor"},
+  {"id": "15", "name": "CORP - Energy Saver - MacBook"}
+]

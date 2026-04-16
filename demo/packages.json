@@ -1,0 +1,10 @@
+[
+  {"id": "1", "packageName": "GoogleChrome-124.0.6367.91.pkg",  "categoryId": "6"},
+  {"id": "2", "packageName": "MicrosoftEdge-124.0.2478.80.pkg", "categoryId": "6"},
+  {"id": "3", "packageName": "Zoom-5.17.11.pkg",                "categoryId": "6"},
+  {"id": "4", "packageName": "Slack-4.38.125.pkg",              "categoryId": "6"},
+  {"id": "5", "packageName": "CrowdStrikeFalcon-7.14.pkg",      "categoryId": "5"},
+  {"id": "6", "packageName": "JamfConnect-2.38.0.pkg",          "categoryId": "2"},
+  {"id": "7", "packageName": "SwiftDialog-2.5.0.4777.pkg",      "categoryId": "1"},
+  {"id": "8", "packageName": "Nudge-2.0.7.81462.pkg",           "categoryId": "1"}
+]

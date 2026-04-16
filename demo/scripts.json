@@ -1,0 +1,12 @@
+[
+  {"id": "1",  "name": "filevault-enable.sh",        "categoryId": "5", "categoryName": "Security"},
+  {"id": "2",  "name": "firewall-enable.sh",          "categoryId": "5", "categoryName": "Security"},
+  {"id": "3",  "name": "crowdstrike-check.sh",         "categoryId": "5", "categoryName": "Security"},
+  {"id": "4",  "name": "jamf-connect-remediate.sh",    "categoryId": "2", "categoryName": "Identity & Access"},
+  {"id": "5",  "name": "macos-upgrade-notify.sh",      "categoryId": "3", "categoryName": "Maintenance"},
+  {"id": "6",  "name": "policy-logs-flush.sh",         "categoryId": "3", "categoryName": "Maintenance"},
+  {"id": "7",  "name": "health-check.sh",               "categoryId": "3", "categoryName": "Maintenance"},
+  {"id": "8",  "name": "dep-enroll-bootstrap.sh",       "categoryId": "9", "categoryName": "Enrollment"},
+  {"id": "9",  "name": "swiftdialog-install.sh",        "categoryId": "1", "categoryName": "Deployment Tools"},
+  {"id": "10", "name": "nudge-configure.sh",             "categoryId": "1", "categoryName": "Deployment Tools"}
+]
